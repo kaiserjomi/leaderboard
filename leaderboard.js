@@ -5,7 +5,17 @@ PlayersList = new Meteor.Collection('players');
 
 if(Meteor.isClient){
   //this code only runs on the client
-Template.leaderboard.helpers({
+Template.leaderboard.events({
+ 
+  'click .player': function(){
+     //events go here
+    console.log("you clicked a .player element");
+  }
+});
+  
+  
+  
+  Template.leaderboard.helpers({
   'player': function(){
     return PlayersList.find()
   },
