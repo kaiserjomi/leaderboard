@@ -9,8 +9,23 @@ Template.leaderboard.events({
  
   'click .player': function(){
      //events go here
-    console.log("you clicked a .player element");
-  }
+    var playerId = this._id;
+    //Definir uma Session, primeiro argumento é o nome da session e o segundo o valor da session
+    Session.set('selectedPlayer', playerId); 
+    
+    
+    //var selectedPlayer = Session.get('selectedPlayer');
+    //console.log(selectedPlayer);
+  },
+  
+  'dblclick': function(){
+    alert("carregou duas vezes");
+  },
+
+  'mouseover .player':function(){
+    console.log("atum");
+  },
+  
 });
   
   
@@ -19,6 +34,15 @@ Template.leaderboard.events({
   'player': function(){
     return PlayersList.find()
   },
+    
+    'selectedClass': function(){
+      var playerId = this._id;
+      var selectedPlayer = Session.get('selectedPlayer')
+      if(playerId == selectedPlayer){
+        return "selected"
+      }
+    }, 
+    
   'conta': function(){
     return PlayersList.find().count();
   },
