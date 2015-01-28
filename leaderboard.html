@@ -15,4 +15,16 @@
   </ul>
   <li> Número de jogadores: {{conta}} </li>
   {{otherHelperFunction}}
+  
+  <!-- botão para incrementar 5 pontos -->
+  {{#if showSelectedPlayer}}
+  <input type="button" class="increment" value="Give 5 Points">
+  {{/if}}
+  <!-- botão para decrementar 5 pontos -->
+  <input type="button" class="decrement" value="Take 5 points">
+  
+  <!-- Jogador Escolhido-->
+  {{#if showSelectedPlayer}}
+  <li> Selected Player: {{showSelectedPlayer.name}}</li>
+  {{/if}}
 </template>

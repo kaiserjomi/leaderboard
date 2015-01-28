@@ -1,4 +1,6 @@
 /* CSS declarations go here */
 .selected{
   background-color: yellow;
+  text-decoration: underline;
+  text-transform: uppercase;
 }
