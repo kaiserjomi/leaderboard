@@ -14,7 +14,6 @@
   {{/each}}
   </ul>
   <li> Número de jogadores: {{conta}} </li>
-  {{otherHelperFunction}}
   
   <!-- botão para incrementar 5 pontos -->
   {{#if showSelectedPlayer}}
@@ -27,4 +26,14 @@
   {{#if showSelectedPlayer}}
   <li> Selected Player: {{showSelectedPlayer.name}}</li>
   {{/if}}
+
+  {{> addPlayerForm}}
+</template>
+
+<!-- template addPlayerForm -->
+<template name="addPlayerForm">
+  <form>
+    <input type="text" name="playerName">
+    <input type="submit" value="Add Player">
+  </form>
 </template>

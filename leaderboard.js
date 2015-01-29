@@ -5,6 +5,22 @@ PlayersList = new Meteor.Collection('players');
 
 if(Meteor.isClient){
   //this code only runs on the client
+  
+Template.addPlayerForm.events({
+ 
+  'submit form': function(event){
+    //para impedir que faça refresh
+    event.preventDefault();
+    //"playerName" é o nome do input de texto da form
+    var playerNameVar = event.target.playerName.value;
+    //Inserir na base de dados "PlayersList"
+    PlayersList.insert({
+      name: playerNameVar,
+      score: 0
+    });
+  }
+});  
+  
 Template.leaderboard.events({
    //clicar no elemento com class player
   'click .player': function(){
