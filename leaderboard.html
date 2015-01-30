@@ -8,11 +8,17 @@
 
 <!-- template leaderboard -->
 <template name="leaderboard">
+  
+  <!-- listar os players da coleção -->
   <ul>
   {{#each player}}
   <li class="player {{selectedClass}}" >{{name}}: {{score}}</li>
   {{/each}}
   </ul>
+  
+  <!-- Método/Helper Adiciona um jogador-->
+  {{> addPlayerForm}}<br>
+  
   <li> Número de jogadores: {{conta}} </li>
   
   <!-- botão para incrementar 5 pontos -->
@@ -22,18 +28,23 @@
   <!-- botão para decrementar 5 pontos -->
   <input type="button" class="decrement" value="Take 5 points">
   
-  <!-- Jogador Escolhido-->
+  
+  <!-- Método/Helper Jogador Escolhido a ser aplicado-->
   {{#if showSelectedPlayer}}
-  <li> Selected Player: {{showSelectedPlayer.name}}</li>
+  <li> Selected Player is: {{showSelectedPlayer.name}}</li>
   {{/if}}
 
-  {{> addPlayerForm}}
+  <!-- Buttao para o evento que Remove o jogador escolhido-->
+  <input type="button" class="remove" value="Remove Player">
+  
 </template>
 
 <!-- template addPlayerForm -->
 <template name="addPlayerForm">
   <form>
-    <input type="text" name="playerName">
-    <input type="submit" value="Add Player">
+    Name:<input type="text" name="playerName" placeholder="Insert Name"><br>
+    Score:<input type="text" name="playerScore" placeholder="Insert Score"><br>
+    <input type="reset" value="Reset">
+    <input type="submit" value="Add Player & Score">
   </form>
 </template>

@@ -13,16 +13,19 @@ Template.addPlayerForm.events({
     event.preventDefault();
     //"playerName" é o nome do input de texto da form
     var playerNameVar = event.target.playerName.value;
+    var playerScoreVar = event.target.playerScore.value;
     //Inserir na base de dados "PlayersList"
     PlayersList.insert({
       name: playerNameVar,
-      score: 0
+      score: playerScoreVar,
     });
+    event.target.playerName.value = "";
+    event.target.playerScore.value = "";
   }
 });  
   
 Template.leaderboard.events({
-   //clicar no elemento com class player
+   //clicar no elemento com class "player" e definir a session para o ID do mesmo
   'click .player': function(){
      //events go here
     var playerId = this._id;
@@ -31,19 +34,19 @@ Template.leaderboard.events({
  
   },
   
-      //quando carrega no botão  com class increment
-      'click .increment': function(){
-      var selectedPlayer = Session.get('selectedPlayer');
-        //ao usar $set vamos apenas fazer update aos campos que queremos, senão o update ia apagar os campos todos o meter apenas os novos
-        //PlayersList.update(selectedPlayer, {$set: {score: 5} });
-        PlayersList.update(selectedPlayer, {$inc: {score: 5} });
+  //quando carrega no botão  com class increment
+  'click .increment': function(){
+    var selectedPlayer = Session.get('selectedPlayer');
+    //ao usar $set vamos apenas fazer update aos campos que queremos,     senão o update ia apagar os campos todos o meter apenas os novos
+    //PlayersList.update(selectedPlayer, {$set: {score: 5} });
+    PlayersList.update(selectedPlayer, {$inc: {score: 5} });
     },
   
-      'click .decrement': function(){
-        var selectedPlayer = Session.get('selectedPlayer');
-        PlayersList.update(selectedPlayer, {$inc: {score: -5} });
-      },
-    
+  'click .decrement': function(){
+    var selectedPlayer = Session.get('selectedPlayer');
+    PlayersList.update(selectedPlayer, {$inc: {score: -5} });
+  },
+
   
   'dblclick': function(){
     alert("Carregou duas vezes em: " + this._id + " "+ this.name );
@@ -51,6 +54,13 @@ Template.leaderboard.events({
 
   'mouseover .player':function(){
     console.log("atum");
+  },
+  
+  //remover um jogador escolhido da coleção segundo o seu ID
+  'click .remove': function(){
+    //define a var selectedPlayer como sendo a session que tem o ID do player
+    var selectedPlayer = Session.get('selectedPlayer');
+    PlayersList.remove(selectedPlayer);
   },
   
 });
